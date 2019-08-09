@@ -1,4 +1,9 @@
 var readline = require('readline-sync');
+var fs = require('fs')
+
+var list = [];
+var path = './data.json';
+
 function menu(){
     while(true){
         console.log('--------------- MENU --------------');
@@ -11,6 +16,7 @@ function menu(){
         var select = readline.question('select: >');
         switch(select){
             case '0':
+            save(path)
                 return 0;
             case '1': 
                 show();
@@ -32,13 +38,15 @@ function menu(){
 
 }
 
+function loadData(path){
+    list = JSON.parse(fs.readFileSync(path, 'utf-8'));
+}
+loadData(path);
 
-var list = [];
-// show
 function show(){
-    console.log('\n\nDanh sach note:')
+    console.log('-----------------------------------------\n\n');
+    console.log('\n\nDanh sach note:');
     for(var note of list){
-
         console.log(note.id + ': ' + note.content);
     }
     console.log('-----------------------------------------\n\n');
@@ -68,6 +76,10 @@ function remove(){
         list[j].id-=1;
     }
     console.log('Success');
+}
+
+function save(path){
+    fs.writeFileSync(path, JSON.stringify(list));
 }
 
 menu();
