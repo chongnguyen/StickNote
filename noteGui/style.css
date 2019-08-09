@@ -1,0 +1,11 @@
+h1 {
+	text-transform: uppercase;
+}
+
+ul li{
+	margin-bottom: 10px;
+}
+
+li button {
+	margin-left: 10px;
+}
